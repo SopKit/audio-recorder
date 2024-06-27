@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder || SopKit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #timer {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Audio Recorder</h1>
+    <div id="timer">00:00</div>
+    <button id="startBtn">Start Recording</button>
+    <button id="pauseBtn" disabled>Pause Recording</button>
+    <button id="downloadBtn" disabled>Download Recording</button>
+    <audio id="audioPlayer" controls></audio>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let isPaused = false;
+        let timerInterval;
+        let seconds = 0;
+
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const timer = document.getElementById('timer');
+
+        function updateTimer() {
+            seconds++;
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            timer.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            seconds = 0;
+            timer.textContent = '00:00';
+        }
+
+        startBtn.addEventListener('click', async () => {
+            if (!isRecording) {
+                // Start recording
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPlayer.src = audioUrl;
+
+                    // Enable download button
+                    downloadBtn.disabled = false;
+                    downloadBtn.addEventListener('click', () => {
+                        const a = document.createElement('a');
+                        a.href = audioUrl;
+                        a.download = 'recording.wav';
+                        a.click();
+                    });
+                };
+
+                mediaRecorder.start();
+                timerInterval = setInterval(updateTimer, 1000);
+                isRecording = true;
+                startBtn.textContent = 'Stop Recording';
+                pauseBtn.disabled = false;
+            } else {
+                // Stop recording
+                mediaRecorder.stop();
+                resetTimer();
+                isRecording = false;
+                startBtn.textContent = 'Start Recording';
+                pauseBtn.disabled = true;
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (isPaused) {
+                // Resume recording
+                mediaRecorder.resume();
+                timerInterval = setInterval(updateTimer, 1000);
+                pauseBtn.textContent = 'Pause Recording';
+                isPaused = false;
+            } else {
+                // Pause recording
+                mediaRecorder.pause();
+                clearInterval(timerInterval);
+                pauseBtn.textContent = 'Resume Recording';
+                isPaused = true;
+            }
+        });
+    </script>
+</body>
+</html>
