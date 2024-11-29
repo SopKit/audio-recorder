@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Recorder || SopKit</title>
+    <meta name="description" content="Audio Recorder by SopKit: A free and simple tool to record, pause, and download audio recordings directly from your browser.">
+    <meta name="keywords" content="audio recorder, online audio recorder, voice recorder, record audio, download audio, browser recorder">
+    <meta name="author" content="SopKit">
+    <title>Audio Recorder | SopKit</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Audio Recorder | SopKit">
+    <meta property="og:description" content="Record, pause, and download audio with our simple and free browser-based audio recorder. Perfect for quick audio recording needs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sopkit.github.io/audio-recorder">
+    <meta property="og:image" content="https://cdn.statically.io/og/SopKit%20%20-%20Audio%20Recorder.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Audio Recorder",
+      "url": "https://sopkit.github.io/audio-recorder",
+      "description": "Record audio online, pause, and download recordings easily with our free browser-based audio recorder.",
+      "creator": {
+        "@type": "Organization",
+        "name": "SopKit"
+      }
+    }
+    </script>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            margin: 0;
+            background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
         }
+
         h1 {
-            color: #333;
+            color: #0056b3;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
+
         button {
             margin: 5px;
             padding: 10px 20px;
@@ -24,29 +56,74 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #007BFF;
+            transition: all 0.3s ease;
+        }
+
+        button:not(:disabled):hover {
+            transform: scale(1.1);
+        }
+
+        #startBtn {
+            background-color: #007bff;
             color: white;
         }
+
+        #pauseBtn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        #downloadBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
         button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
+
         #timer {
-            font-size: 20px;
+            font-size: 1.5rem;
             margin: 10px 0;
+            color: #333;
         }
+
         audio {
             margin-top: 20px;
         }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
     <h1>Audio Recorder</h1>
+    <p>Record, pause, and download your audio recordings directly from your browser. Perfect for voice memos, notes, and quick audio clips.</p>
+
     <div id="timer">00:00</div>
     <button id="startBtn">Start Recording</button>
     <button id="pauseBtn" disabled>Pause Recording</button>
     <button id="downloadBtn" disabled>Download Recording</button>
     <audio id="audioPlayer" controls></audio>
+
+    <footer>
+        <p>© 2024 SopKit. All rights reserved. | <a href="https://sopkit.github.io">Back to Homepage</a></p>
+    </footer>
 
     <script>
         let mediaRecorder;
@@ -132,4 +209,5 @@
         });
     </script>
 </body>
+
 </html>
