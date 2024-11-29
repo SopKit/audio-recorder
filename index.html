@@ -4,117 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Audio Recorder by SopKit: Record, pause, and download audio files easily. Bookmark this page for all your recording needs and discover more tools at SopKit.">
-    <meta name="keywords" content="audio recorder, record audio, online audio recording tool, SopKit tools, pause recording, download recording, free tools by SopKit">
+    <meta name="description" content="Record, pause, and download audio seamlessly with SopKit's Audio Recorder. A fast, reliable tool for creators and professionals. Bookmark SopKit for all your online tools.">
+    <meta name="keywords" content="audio recorder, online audio tool, record audio online, free recording tool, SopKit tools, download audio, online utilities, best online tools">
     <meta name="author" content="SopKit">
-    <title>Audio Recorder - SopKit</title>
+    <title>Audio Recorder | SopKit Tools</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
+        /* Reset & Global Styling */
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #007BFF, #00C6FF);
-            color: #fff;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #202124;
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
         }
 
         header {
             width: 100%;
-            padding: 10px;
-            background-color: #0056b3;
-            text-align: center;
+            padding: 15px 0;
+            background-color: #4285f4;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
         }
 
         header a {
             text-decoration: none;
             color: #fff;
-            font-size: 18px;
-            font-weight: bold;
         }
 
         h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #202124;
         }
 
         p {
-            text-align: center;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        .container {
-            text-align: center;
+            max-width: 800px;
+            margin: 10px auto;
+            font-size: 1rem;
+            color: #5f6368;
         }
 
         #timer {
-            font-size: 22px;
+            font-size: 1.5rem;
             margin: 20px 0;
         }
 
         button {
-            margin: 5px;
-            padding: 12px 25px;
-            font-size: 18px;
-            cursor: pointer;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #34a853;
             border: none;
-            border-radius: 8px;
-            background-color: #00c6ff;
-            color: #fff;
-            transition: all 0.3s;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
         }
 
         button:hover {
-            background-color: #007BFF;
+            background-color: #0c7a2e;
         }
 
         button:disabled {
-            background-color: #ccc;
+            background-color: #dadce0;
             cursor: not-allowed;
         }
 
         audio {
             margin-top: 20px;
             width: 80%;
+            max-width: 600px;
         }
 
         footer {
-            text-align: center;
             margin-top: 30px;
-            padding: 10px 0;
-            background-color: #0056b3;
-            color: #fff;
-            width: 100%;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 16px;
+            padding: 10px;
+            background-color: #f1f3f4;
+            color: #5f6368;
         }
 
         footer a {
-            color: #fff;
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        footer a:hover {
             text-decoration: underline;
         }
-    </style>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Audio Recorder - SopKit",
-        "description": "Online audio recorder to record, pause, and download audio files easily.",
-        "url": "https://sopkit.github.io/audio-recorder",
-        "author": {
-            "@type": "Organization",
-            "name": "SopKit"
+
+        .highlight {
+            color: #34a853;
+            font-weight: bold;
         }
-    }
-    </script>
+    </style>
 </head>
 
 <body>
@@ -122,22 +113,31 @@
         <a href="https://sopkit.github.io">← Back to SopKit Homepage</a>
     </header>
 
-    <h1>Audio Recorder by SopKit</h1>
-    <p>Your free online tool to record, pause, and download audio files with ease. Bookmark this page for quick access!</p>
+    <main>
+        <h1>Welcome to SopKit's Audio Recorder</h1>
+        <p>The <span class="highlight">ultimate free online audio recorder</span> for creators, professionals, and students! Seamlessly record, pause, and download audio with just a few clicks.</p>
+        <p>Looking for fast, hassle-free recording? <strong>Bookmark this page</strong> and access SopKit tools anytime, anywhere. Discover why thousands trust SopKit for their productivity needs.</p>
 
-    <div class="container">
         <div id="timer">00:00</div>
         <button id="startBtn">Start Recording</button>
         <button id="pauseBtn" disabled>Pause Recording</button>
         <button id="downloadBtn" disabled>Download Recording</button>
         <audio id="audioPlayer" controls></audio>
-    </div>
 
-    <p>Discover more tools and utilities for developers and creators at <a href="https://sopkit.github.io">SopKit</a>. Just search "SopKit tools" on Google!</p>
-    <p>Explore our wide range of tools, including HTML to JSX converters, YouTube tag generators, and more!</p>
+        <section style="margin-top: 40px;">
+            <h2>Why Choose SopKit?</h2>
+            <p>At SopKit, we prioritize <span class="highlight">efficiency</span>, <span class="highlight">user-friendliness</span>, and <span class="highlight">innovation</span>. Whether you need an audio recorder, YouTube tag generator, or HTML to JSX converter, SopKit has a tool for every need.</p>
+            <p>Search "<strong>SopKit Tools</strong>" on Google to explore more!</p>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <h2>Don't Forget to Bookmark!</h2>
+            <p>Bookmark this page for quick access to our <strong>Audio Recorder</strong>. Save time, boost productivity, and achieve more with SopKit tools.</p>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2024 SopKit. All rights reserved. | <a href="https://sopkit.github.io">Visit SopKit</a></p>
+        <p>© 2024 SopKit. All rights reserved. | <a href="https://sopkit.github.io">Explore SopKit</a></p>
     </footer>
 
     <script>
